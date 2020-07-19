@@ -6,7 +6,7 @@ async function getUsers() {
     getUserContent(finalContent);
     console.log(finalContent);
   } catch (err) {
-    alert(`message: ${err.statusText} , status: ${err.status}`);
+    alert("Oooops something goes wrong");
   }
 }
 getUsers();
