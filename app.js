@@ -1,15 +1,17 @@
+const DOM = {};
+
 async function getUsers() {
+  if (DOM.init) return;
   try {
     let usersData = await fetch("https://randomuser.me/api/?results=50");
     let usersContent = await usersData.json();
     let finalContent = usersContent.results.filter((u) => u.name);
-    getUserContent(finalContent);
-    console.log(finalContent);
+    DOM.init = $("#mainContent");
+    DOM.init.append(drawHeaders(), getUserContent(finalContent));
   } catch (err) {
     alert("Oooops something goes wrong");
   }
 }
-getUsers();
 
 function getUserContent(users) {
   let key;
@@ -40,3 +42,32 @@ function draw(first, last, gender, photo) {
   trLayout.append(tdGender);
   trLayout.append(tdPhoto);
 }
+
+function drawHeaders() {
+  let thRow = $("#tHead");
+  let trLayoutHeaders = $("<tr/>");
+  let thFirstName = $("<th/>", {
+    text: "First Name",
+  });
+  let thLastName = $("<th/>", {
+    text: "Last Name",
+  });
+  let thGender = $("<th/>", {
+    text: "Gender",
+  });
+  let thPhoto = $("<th/>", {
+    text: "Photo",
+  });
+  thRow.append(trLayoutHeaders);
+  trLayoutHeaders.append(thFirstName);
+  trLayoutHeaders.append(thLastName);
+  trLayoutHeaders.append(thGender);
+  trLayoutHeaders.append(thPhoto);
+}
+
+(function getList() {
+  $("#getUsersList").on("click", getUsers);
+  $("#reset").on("click", () => {
+    window.location.reload();
+  });
+})();
