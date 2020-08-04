@@ -1,0 +1,25 @@
+.container {
+    margin-bottom: 10px;
+}
+
+header {
+    text-align: center;
+}
+
+.statdiv {
+    display: inline-block;
+}
+
+#mainContent {
+    float: left;
+}
+
+.table {
+    width: 40%;
+}
+
+#main {
+    float: right;
+    text-align: center;
+    margin-right: 100px;
+}
