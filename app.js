@@ -12,14 +12,35 @@ async function getUsers() {
 
   } catch (err) {
     alert("Oooops something goes wrong");
+    console.log(err)
   }
 }
 
 function getCountryStatistic(country) {
   const getUsersCountrys = country.map(user => user.location.country)
   console.log(getUsersCountrys)
+  const sameCountriesArr = getUsersCountrys.reduce((country, nextCountry) => {
+    country[nextCountry] = (country[nextCountry] || 0) + 1
+    return country
+
+  }, {})
+  console.log(sameCountriesArr)
+  const headC = $("<h2>");
+  $("#main").append(headC)
+
+  headC.text("How much people from each Country")
+  for (const [key, value] of Object.entries(sameCountriesArr)) {
+    const h1 = $("<h4>");
+    h1.text(`${key}: ${value}`)
+    console.log(`${key}: ${value}`);
+    $("#main").append(h1)
+
+  }
+
 
 }
+
+
 
 function getGenderStatistic(usersArr) {
   const usersGen = usersArr.map(user => user.gender)
@@ -46,7 +67,7 @@ function getTableDraw(num, female, male) {
   numberOFUsers.text(`Number of users : ${num.length}`)
   h4FemaleUser.text(`Female users :  ${female.length}`)
   h4MaleUser.text(`Male users :  ${male.length}`)
-  $("#header").append(statDiv)
+  $("#main").append(statDiv)
   statDiv.append(h2Header, numberOFUsers, h4FemaleUser, h4MaleUser)
 }
 
