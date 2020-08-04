@@ -1,3 +1,11 @@
 .container {
     margin-bottom: 10px;
 }
+
+header {
+    text-align: center;
+}
+
+.statdiv {
+    display: inline-block
+}
